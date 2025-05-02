@@ -1,49 +1,105 @@
+/* start landing section */
 .landing-section {
     background-image: url("/Assets/IMG/Home/1.png");
     background-size: cover;
     height: calc(100vh - 52px);
     width: 100%;
-}
-
-.navbar {
-    padding: 0rem !important;
+    overflow: hidden;
 }
 
 .landing-section button {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.landing-section button:hover {
+.hover:hover {
     color: #4BAF47;
     background-color: #eee !important;
     cursor: pointer;
+    border: navajowhite;
 }
 
+/* end landing section */
+
+/* Start about section */
 .small-image {
     bottom: 20%;
     left: 25%;
     border: 5px solid white;
 }
 
-.footer {
-    background-color: #19283f;
+/* End about section */
+
+/* Start what we offer */
+.features {
+    background: url("/Assets/IMG/Home/wheats.webp.png");
+    background-size: cover;
+    overflow: hidden;
 }
 
-.Email {
-    background-color: #0d6efd;
-    color: #eee;
+.mini-img {
+    position: absolute;
+    top: 170px;
+    left: 226px;
+    background-color: #EEC044;
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }
 
-.Email:hover {
-    color: #0d6efd;
-    background-color: #eee;
+/* End what we offer */
+
+/* Start hero section */
+.hero {
+    background-image: url('/Assets/IMG/Home/drone.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 500px;
+    overflow: hidden;
 }
 
-.social-media li a:hover {
-    background-color: #0d6efd;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
+/* End hero section */
+
+/* start why we choose */
+.image-container::after {
+    content: "";
+    width: 300px;
+    height: calc(100% + 25px);
+    background-color: #4baf47a6;
+    position: absolute;
+    left: -60px;
+    top: -15px;
+    z-index: -1;
 }
+
+.overlay {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    background: rgba(255, 165, 0, 0.9);
+    color: white;
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size: 20px;
+    z-index: 3;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+/* End why we choose */
+
+/* Start Interested section */
+.banner {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    background: url('/Assets/IMG/Home/Soil-Analysis.jpg') no-repeat center center;
+    background-size: cover;
+    margin: 10px 0px;
+    overflow: hidden;
+}
+
+/* End Interested section */

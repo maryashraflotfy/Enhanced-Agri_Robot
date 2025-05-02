@@ -1,0 +1,9 @@
+/* start landing section */
+.landing-section {
+    background-image: url("/Assets/IMG/contact/img.jpg");
+    background-size: cover;
+    height: 200px;
+    width: 100%;
+}
+
+/* End landing section */

@@ -1,3 +1,52 @@
 body {
     font-family: "roboto", sans-serif;
 }
+
+/* start nav  */
+
+.navbar {
+    padding: 0rem !important;
+}
+
+/* end nav  */
+
+/* Start team section */
+.team {
+    font-weight: bold;
+    background: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    bottom: -20px;
+    right: 20px;
+    z-index: 2;
+    width: 200px;
+}
+
+/* End team section */
+/* start footer */
+.footer {
+    background-color: #1F1E17;
+}
+
+.Email {
+    background-color: #0d6efd;
+    color: #eee;
+}
+
+.Email:hover {
+    color: #0d6efd;
+    background-color: #eee;
+}
+
+.social-media li a:hover {
+    background-color: #0d6efd;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+/* end footer */
