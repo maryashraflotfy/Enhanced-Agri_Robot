@@ -12,10 +12,13 @@
 }
 
 .hover:hover {
-    color: #4BAF47;
     background-color: #eee !important;
     cursor: pointer;
     border: navajowhite;
+}
+
+.hover:hover a {
+    color: #4BAF47 !important;
 }
 
 /* end landing section */
