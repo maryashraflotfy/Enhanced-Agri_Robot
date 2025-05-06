@@ -2,6 +2,35 @@ body {
     font-family: "roboto", sans-serif;
 }
 
+.scroll {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 10px;
+    width: 0;
+    background-color: #4BAF47;
+    z-index: 9999;
+}
+
+.up {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    right: -60px;
+    background-color: #4BAF47;
+    color: #fff;
+    padding: 10px;
+    margin: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+span:hover {
+    cursor: pointer;
+    background-color: #85d382;
+}
+
 /* start nav  */
 
 .navbar {
