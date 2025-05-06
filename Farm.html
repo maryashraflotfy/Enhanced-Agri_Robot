@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Details - Agribot</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@700&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-gauge@0.2.0/dist/chartjs-plugin-gauge.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="Assets/CSS/Farm/Farm.css">
+    <style>
+        .gauge-container {
+            width: 150px;
+            height: 120px;
+            margin: 0 auto;
+        }
+        .npk-bar-container {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <main class="container-fluid">
+        <section class="farm-details">
+            <div class="farm-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3416.465970104768!2d30.949456!3d31.09677850000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f7ac7ba77647ed%3A0xcd75a051c77224b6!2sFaculty%20of%20Engineering%2C%20Kafrelsheikh%20University!5e0!3m2!1sen!2seg!4v1741398316302!5m2!1sen!2seg" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="farm-info">
+                <h3>Farm Name</h3>
+                <p>Location <span id="farm-location"></span></p>
+                <p>Size <span id="farm-size"></span></p>
+                <p>Crops <span id="farm-crops"></span></p>
+            </div>
+        </section>
+
+        <div class="row">
+            <div class="col-md-5">
+                <div class="tasks-section-wrapper">
+                    <div class="section-header">
+                        <h4>My Farm Tasks</h4>
+                        <button class="add-button">+</button>
+                    </div>
+                    <table class="tasks-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Service Type</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="task-item">
+                                <td><img src="D:\download\Graduation Project Main Folder\agribot\Weed Detection and Removal  with robotics__.jpg" alt="Task 1" style="width: 30px; height: 30px;"></td>
+                                <td>Sustainable weed removal</td>
+                                <td>15 Mar 2025</td>
+                                <td><span class="badge bg-warning">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td><img src="D:\download\Graduation Project Main Folder\agribot\Weed Detection and Removal  with robotics__.jpg" alt="Task 2" style="width: 30px; height: 30px;"></td>
+                                <td>Sustainable weed removal</td>
+                                <td>16 Mar 2025</td>
+                                <td><span class="badge bg-info">In progress</span></td>
+                            </tr>
+                            <tr>
+                                <td><img src="D:\download\Graduation Project Main Folder\agribot\Weed Detection and Removal  with robotics__.jpg" alt="Task 3" style="width: 30px; height: 30px;"></td>
+                                <td>Sustainable weed removal</td>
+                                <td>17 Mar 2025</td>
+                                <td><span class="badge bg-success">Completed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <section class="task-details">
+                    <h4>Current Task Details</h4>
+                    <div class="npk-measurements">
+                        <h5>NPK Measurements</h5>
+                        <div class="gauge-charts">
+                            <div class="gauge-chart">
+                                <canvas id="nitrogenGauge" class="gauge-container"></canvas>
+                                <p>N (10 ppm)</p>
+                            </div>
+                            <div class="gauge-chart">
+                                <canvas id="phosphorusGauge" class="gauge-container"></canvas>
+                                <p>P (20 ppm)</p>
+                            </div>
+                            <div class="gauge-chart">
+                                <canvas id="potassiumGauge" class="gauge-container"></canvas>
+                                <p>K (10 ppm)</p>
+                            </div>
+                            <div class="suggestions">
+                                <h6>Suggestions</h6>
+                                <p>May 3, 2025</p>
+                            </div>
+                        </div>
+                        <div class="npk-bar-container">
+                            <h4>NPK Levels Over Time</h4>
+                            <canvas id="npkBarChart" class="img-fluid"></canvas>
+                        </div>
+                    </div>
+                    <div class="card bg-light">
+                        <div class="card-body">
+                          <h3 class="card-title">Weed removal</h3>
+                          <div class="row mb-3">
+                            <div class="col-md-6">
+                              <h4>Removal Process Status</h4>
+                              <p class="text-muted">status of process</p>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="img-container">
+                                <img src="your-image.jpg" alt="Weed Removal" class="img-fluid rounded">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mt-4">
+                            <h4>Suggestions</h4>
+                            <p class="text-muted">This is a subtitle</p>
+                          </div>
+                        </div>
+                    </div>          
+                                
+                    <div class="crop-health-monitoring mt-4">
+                        <h5>Crop Health Monitoring</h5>
+                        <p>Current status of crop:</p>
+                        <p>The following was found:</p>
+
+                        <ul class="nav nav-tabs" id="diseaseTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="disease1-tab" data-bs-toggle="tab" data-bs-target="#disease1" type="button" role="tab" aria-controls="disease1" aria-selected="true">Disease 1</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="disease2-tab" data-bs-toggle="tab" data-bs-target="#disease2" type="button" role="tab" aria-controls="disease2" aria-selected="false">Disease 2</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="disease3-tab" data-bs-toggle="tab" data-bs-target="#disease3" type="button" role="tab" aria-controls="disease3" aria-selected="false">Disease 3</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="disease4-tab" data-bs-toggle="tab" data-bs-target="#disease4" type="button" role="tab" aria-controls="disease4" aria-selected="false">Disease 4</button>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content mt-2" id="diseaseTabContent">
+                            <div class="tab-pane fade show active" id="disease1" role="tabpanel" aria-labelledby="disease1-tab">
+                                <h4>Disease 1</h4>
+                                <div id="disease1-map" style="height: 200px; width: 100%; border: 1px solid #ccc;"></div>
+                                <p><strong>Disease Name:</strong> Early Blight</p>
+                                <p><strong>Location:</strong> Lower leaves, spreading upwards.</p>
+                                <p><strong>Spread Area:</strong> Increasing rapidly in humid conditions.</p>
+                                <p><strong>Side Effects:</strong> Leaf spots, yellowing, defoliation.</p>
+                                <p><strong>Suggestions / Treatment:</strong> Apply fungicide, improve air circulation.</p>
+                            </div>
+                            <div class="tab-pane fade" id="disease2" role="tabpanel" aria-labelledby="disease2-tab">
+                                <h4>Disease 2</h4>
+                                <div id="disease2-map" style="height: 200px; width: 100%; border: 1px solid #ccc;"></div>
+                                <p><strong>Disease Name:</strong> Bacterial Spot</p>
+                                <p><strong>Location:</strong> Small spots on leaves and fruits.</p>
+                                <p><strong>Spread Area:</strong> Favored by warm, wet weather.</p>
+                                <p><strong>Side Effects:</strong> Leaf lesions, fruit spots.</p>
+                                <p><strong>Suggestions / Treatment:</strong> Copper-based fungicides, avoid overhead irrigation.</p>
+                            </div>
+                            <div class="tab-pane fade" id="disease3" role="tabpanel" aria-labelledby="disease3-tab">
+                                <h4>Disease 3</h4>
+                                <div id="disease3-map" style="height: 200px; width: 100%; border: 1px solid #ccc;"></div>
+                                <p><strong>Disease Name:</strong> Late Blight</p>
+                                <p><strong>Location:</strong> Water-soaked lesions on leaves and stems.</p>
+                                <p><strong>Spread Area:</strong> Rapid in cool, wet conditions.</p>
+                                <p><strong>Side Effects:</strong> Rapid plant death, fruit rot.</p>
+                                <p><strong>Suggestions / Treatment:</strong> Apply fungicide immediately, remove infected plants.</p>
+                            </div>
+                            <div class="tab-pane fade" id="disease4" role="tabpanel" aria-labelledby="disease4-tab">
+                                <h4>Disease 4</h4>
+                                <div id="disease4-map" style="height: 200px; width: 100%; border: 1px solid #ccc;"></div>
+                                <p><strong>Disease Name:</strong> Leaf Mold</p>
+                                <p><strong>Location:</strong> Yellow spots on upper leaves, gray mold underneath.</p>
+                                <p><strong>Spread Area:</strong> High humidity, poor air circulation.</p>
+                                <p><strong>Side Effects:</strong> Leaf drop, reduced fruit set.</p>
+                                <p><strong>Suggestions / Treatment:</strong> Improve air circulation, reduce humidity, fungicides.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- NPK Bar Chart Initialization ---
+            const barChartCtx = document.getElementById('npkBarChart').getContext('2d');
+            const npkBarChart = new Chart(barChartCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [{
+                        label: 'Nitrogen',
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+                        data: [65, 59, 80, 81]
+                    }, {
+                        label: 'Phosphorus',
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1,
+                        data: [28, 48, 40, 19]
+                    }, {
+                        label: 'Potassium',
+                        backgroundColor: 'rgba(255, 206, 86, 0.5)',
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        borderWidth: 1,
+                        data: [35, 23, 56, 78]
+                    }]
+                },
+                options: {
+                    scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                    },
+                    plugins: {
+                        title: { display: true, text: 'NPK Levels Over Time' }
+                    }
+                }
+            });
+
+            // --- Gauge Chart Initialization ---
+            Chart.register(ChartGauge);
+            const gaugeOptions = {
+                type: 'gauge',
+                data: {
+                    datasets: [{
+                        value: 50, // Initial value (will be overridden)
+                        minValue: 0,
+                        maxValue: 100,
+                        backgroundColor: ['red', 'orange', 'yellow', 'green'],
+                        borderWidth: 2,
+                    }]
+                },
+                options: {
+                    needle: {
+                        radiusPercentage: 2,
+                        widthPercentage: 3.2,
+                        lengthPercentage: 80,
+                        color: 'rgba(0, 0, 0, 1)'
+                    },
+                    valueLabel: {
+                        formatter: (value) => Math.round(value),
+                        fontSize: 16,
+                        color: 'black',
+                        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                        borderRadius: 5,
+                        padding: 5
+                    },
+                    layout: { padding: { top: 10, bottom: 10 } },
+                    circumference: 1 * Math.PI,
+                    rotation: -1 * Math.PI,
+                    plugins: { datalabels: { display: false } }
+                }
+            };
+
+            // N Gauge
+            const nitrogenCtx = document.getElementById('nitrogenGauge').getContext('2d');
+            new Chart(nitrogenCtx, { ...gaugeOptions, data: { datasets: [{ ...gaugeOptions.data.datasets[0], value: 10 }] } });
+
+            // P Gauge
+            const phosphorusCtx = document.getElementById('phosphorusGauge').getContext('2d');
+            new Chart(phosphorusCtx, { ...gaugeOptions, data: { datasets: [{ ...gaugeOptions.data.datasets[0], value: 20 }] } });
+
+            // K Gauge
+            const potassiumCtx = document.getElementById('potassiumGauge').getContext('2d');
+            new Chart(potassiumCtx, { ...gaugeOptions, data: { datasets: [{ ...gaugeOptions.data.datasets[0], value: 10 }] } });
+
+            // --- Heatmap Initialization ---
+            function initDiseaseHeatmap(mapId, heatmapData) {
+                const mapElement = document.getElementById(mapId);
+                if (!mapElement) {
+                    console.error(`Map container element with id "${mapId}" not found`);
+                    return;
+                }
+                console.log('Initializing heatmap for:', mapId);
+                console.log('Heatmap data:', heatmapData);
+
+                var map = L.map(mapId).setView([31.096669, 30.950029], 19);
+                L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
+                    attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+                L.marker([31.096669, 30.950029]).addTo(map).bindPopup('Center Point').openPopup(); // Added marker for verification
+
+                L.heatLayer(heatmapData, {radius: 25, maxIntensity: 100}).addTo(map);
+            }
+
+            // Sample Heatmap Data
+            const disease1Data = [[31.115, 30.932, 80], [31.117, 30.934, 90], [31.116, 30.933, 70]];
+            const disease2Data = [[31.118, 30.935, 60], [31.119, 30.936, 75], [31.117, 30.933, 50]];
+            const disease3Data = [[31.114, 30.931, 95], [31.116, 30.934, 85]];
+            const disease4Data = [[31.120, 30.937, 70], [31.118, 30.933, 65]];
+
+            // Initialize heatmaps for each disease tab
+            initDiseaseHeatmap('disease1-map', disease1Data);
+            initDiseaseHeatmap('disease2-map', disease2Data);
+            initDiseaseHeatmap('disease3-map', disease3Data);
+            initDiseaseHeatmap('disease4-map', disease4Data);
+
+            // Enable Bootstrap Tabs
+            const tabElms = document.querySelectorAll('#diseaseTabs button[data-bs-toggle="tab"]');
+            tabElms.forEach(tabElm => {
+                tabElm.addEventListener('show.bs.tab', event => {
+                    // No specific action needed on tab show for now,
+                    // but you can add logic here if required.
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
