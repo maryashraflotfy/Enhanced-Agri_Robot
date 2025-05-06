@@ -167,3 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+document.getElementById("add-task").addEventListener("click", function () {
+  // Navigate to the new page
+  window.location.href = "add_task.html"; // Change this to your target page
+});
