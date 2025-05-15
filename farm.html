@@ -8,19 +8,19 @@
     <link rel="stylesheet" href="/Assets/CSS/all.min.css" />
     <link rel="stylesheet" href="/Assets/CSS/main.css" />
     <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
       href="https://fonts.googleapis.com/css2?family=Handjet:wght@700&family=Manrope:wght@200..800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/Assets/CSS/main.css" />
-    <link rel="stylesheet" href="Assets/CSS/farm/Farm.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-gauge@0.2.0/dist/chartjs-plugin-gauge.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="Assets/CSS/Farm/Farm.css" />
     <style>
       .gauge-container {
@@ -166,20 +166,20 @@
               <h5>NPK Measurements</h5>
               <div class="gauge-charts">
                 <div class="gauge-chart">
-                  <canvas id="nitrogenGauge" class="gauge-container"></canvas>
-                  <p>N (10 ppm)</p>
+                  <div id="gaugeNitrogen"></div>
                 </div>
+
                 <div class="gauge-chart">
-                  <canvas id="phosphorusGauge" class="gauge-container"></canvas>
-                  <p>P (20 ppm)</p>
+                  <div id="gaugePhosphorus"></div>
                 </div>
+
                 <div class="gauge-chart">
-                  <canvas id="potassiumGauge" class="gauge-container"></canvas>
-                  <p>K (10 ppm)</p>
+                  <div id="gaugePotassium"></div>
                 </div>
+
                 <div class="suggestions">
                   <h6>Suggestions</h6>
-                  <p>May 3, 2025</p>
+                  <p>placeholderplaceholderplaceholderplaceholderplaceholder</p>
                 </div>
               </div>
               <div class="npk-bar-container">
@@ -393,6 +393,7 @@
       </div>
     </main>
     <!-- End Farm section -->
+    
     <!-- start footer -->
     <div class="footer pb-5 pt-5 text-white-50 text-center text-md-start">
       <div class="container">
@@ -485,7 +486,173 @@
       </div>
     </div>
     <!-- end footer -->
+  
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
     <script src="Assets/JS/farm/farm.js"></script>
-    <script src="/Assets/JS/main.js"></script>
+    <!--please keep each script as it's ,متلصمة بجد-->
+
+    <script>
+      /////////////////////////////  Apexcharts package
+      document.addEventListener("DOMContentLoaded", function () {
+        const createGauge = (elementId, label, value, color) => {
+          const options = {
+            chart: {
+              type: "radialBar",
+              height: 200,
+            },
+            series: [value],
+            labels: [label],
+            plotOptions: {
+              radialBar: {
+                hollow: {
+                  size: "50%",
+                },
+                dataLabels: {
+                  name: {
+                    fontSize: "16px",
+                  },
+                  value: {
+                    fontSize: "20px",
+                    formatter: function (val) {
+                      return val + " ppm";
+                    },
+                  },
+                },
+              },
+            },
+            colors: [color],
+          };
+
+          const chart = new ApexCharts(
+            document.querySelector(`#${elementId}`),
+            options
+          );
+          chart.render();
+        };
+
+        // Create the 3 gauges
+        createGauge("gaugeNitrogen", "Nitrogen", 10, "#00E396");
+        createGauge("gaugePhosphorus", "Phosphorus", 20, "#FEB019");
+        createGauge("gaugePotassium", "Potassium", 15, "#FF4560");
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // --- NPK Bar Chart Initialization ---
+        const barChartCtx = document
+          .getElementById("npkBarChart")
+          .getContext("2d");
+        const npkBarChart = new Chart(barChartCtx, {
+          type: "bar",
+          data: {
+            labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+            datasets: [
+              {
+                label: "Nitrogen",
+                backgroundColor: "rgba(0, 227, 150, 0.5)",
+                borderColor: "rgba(0, 227, 150, 1)",
+                borderWidth: 1,
+                data: [65, 59, 80, 81],
+              },
+              {
+                label: "Phosphorus",
+                backgroundColor: "rgba(254, 176, 25, 0.5)",
+                borderColor: "rgba(254, 176, 25, 1)",
+                borderWidth: 1,
+                data: [28, 48, 40, 19],
+              },
+              {
+                label: "Potassium",
+                backgroundColor: "rgba(255, 69, 96, 0.5)",
+                borderColor: "rgba(255, 69, 96, 1)",
+                borderWidth: 1,
+                data: [35, 23, 56, 78],
+              },
+            ],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+            plugins: {
+              title: { display: true, text: "NPK Levels Over Time" },
+            },
+          },
+        });
+
+        //- HEATMAP ,Leaflet Map Initialization --
+        const mapOptions = {
+          center: [31.096669, 30.950029],
+          zoom: 17
+        };
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // SAMPLE HEATMAP DATA (Placeholder) for each disease NEEDED to be replaced with real data
+        const heatData = {
+          "disease1-map": [
+            [31.0968, 30.9501, 0.7],
+            [31.0966, 30.9503, 0.8],
+            [31.0969, 30.9502, 0.9],
+          ],
+          "disease2-map": [
+            [31.0967, 30.9502, 0.5],
+            [31.0965, 30.9504, 0.9],
+            [31.0971, 30.9501, 0.4]
+          ],
+          "disease3-map": [
+            [31.0969, 30.9501, 0.9],
+            [31.0964, 30.9502, 0.8],
+            [31.0970, 30.9503, 0.7]
+          ],
+          "disease4-map": [
+            [31.0965, 30.9500, 0.7],
+            [31.0963, 30.9502, 0.8],
+            [31.0968, 30.9503, 0.6]
+          ]
+        };
+
+        const maps = {};
+
+        function initMap(id, points) {
+          const map = L.map(id, mapOptions);
+          tileLayer.addTo(map);
+          L.heatLayer(points, {
+            radius: 25,
+            maxZoom: 18,
+            blur: 15,
+            max: 1.0,
+            gradient: { 0.4: 'blue', 0.6: 'lime', 0.8: 'red' }
+          }).addTo(map);
+          maps[id] = map;
+        }
+
+        // Load the first tab map immediately
+        initMap("disease1-map", heatData["disease1-map"]);
+
+        // Load other maps when tabs are shown
+        document.addEventListener('shown.bs.tab', function (event) {
+          const targetId = event.target.getAttribute('data-bs-target');
+          const mapId = targetId.replace("#", "") + "-map";
+
+          if (!maps[mapId]) {
+            initMap(mapId, heatData[mapId]);
+          }
+
+          setTimeout(() => {
+            maps[mapId]?.invalidateSize();
+          }, 300);
+        });
+ 
+      });
+     
+    </script>
+    
+    
   </body>
 </html>
